@@ -132,4 +132,102 @@ export const userAPI = {
     },
   }).then(res => res.json()),
 };
+// User Management API functions
+export const userAPI = {
+  // Get all users
+  getUsers: () => fetch(API_ENDPOINTS.USERS, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
 
+  // Get user by ID
+  getUser: (id) => fetch(`${API_ENDPOINTS.USERS}/${id}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
+
+  // Create new user
+  createUser: (userData) => fetch(API_ENDPOINTS.REGISTER, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  }).then(res => res.json()),
+
+  // Update user
+  updateUser: (id, userData) => fetch(`${API_ENDPOINTS.USERS}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  }).then(res => res.json()),
+
+  // Delete user
+  deleteUser: (id) => fetch(`${API_ENDPOINTS.USERS}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
+
+  // Reset user password
+  resetPassword: (id, password) => fetch(`${API_ENDPOINTS.USERS}/${id}/password`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ password }),
+  }).then(res => res.json()),
+
+  // Reset password to default
+  resetPasswordToDefault: (id) => fetch(`${API_ENDPOINTS.USERS}/${id}/reset-password`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
+
+  // Toggle user active status
+  toggleUserStatus: (id, isActive) => fetch(`${API_ENDPOINTS.USERS}/${id}/status`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ is_active: isActive }),
+  }).then(res => res.json()),
+
+  // Get user activity logs
+  getUserActivityLogs: (id) => fetch(`${API_ENDPOINTS.USERS}/${id}/activity-logs`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
+
+  // Get user statistics
+  getUserStats: (id) => fetch(`${API_ENDPOINTS.USERS}/${id}/stats`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json()),
+};
+
+  export default API_BASE_URL;
+ 
